@@ -1,0 +1,58 @@
+body {font-family:Verdana, Arial, sans-serif; background-color: #E6DFAF;}
+#wrapper { background-color: #DFD2B7; color: #2E0000; width: 80%; margin: auto; min-width:850px; box-shadow: 5px 5px 5px #6B3A2A;} 
+#leftcolumn { color: #2E0000; float: left; width: 150px; } 
+#rightcolumn { margin-left: 155px; background-color: #F5F5E0; color: #000000;} 
+header{ background-color: #CCB492; color: #2E0000; padding:10px; text-align:center;}
+
+h1 { color: #2E0000; font-family: Verdana, Arial, sans-serif;}
+.content {padding: 20px 20px 40px 20px; overflow:auto; color: #2E0000;} 
+.content-row { display: flex; align-items: flex-start; gap: 40px; }
+.content-row > img { width: 380px; height: 180px; object-fit: cover; padding: 0 0 0 50px; }
+
+#floatright { margin: 10px; float: right;} 
+footer {font-size:70%;text-align: center; clear: right; padding-bottom:20px; }	
+footer { background-color: #CCB492; color: #2E0000; font-size: 70%; text-align: center; clear: both; padding: 15px;}
+
+nav ul { list-style-type: none; margin: 0; padding: 20px 0 0 40px; } 
+nav a { text-decoration: none; color: #2E0000; font-weight: bold; } 
+nav a:visited { color: #8B5A3C; } 
+nav a:hover { color: #8B5A3C; }
+
+.coffee-list { list-style-type: none; padding: 0; margin: 0; }
+.coffee-list li { display: flex; align-items: center; gap: 10px; } 
+.coffee-list li img { width: 24px; height: 24px; }
+.info { flex: 1; }
+
+table { border-collapse: collapse; width: 60%; margin-left:180px;font-family: Verdana, Arial, sans-serif; font-size: 16px;}
+td { border: 0px solid #2E0000; padding: 10px;}
+table { border-collapse: collapse; }
+tr:nth-child(odd) { background-color: #CCB493; }
+tr:nth-child(even) { background-color: #F5F5E0; }
+td { padding: 10px; }
+td:first-child { border-right: 2px solid #F5F5E0; text-align: center; width: 200px; font-size: 20px; font-weight: bold; }
+
+.music-row table td { text-align: left; }
+.music-row table td:first-child { border-right: none; width: auto; text-align: left; }
+
+form { display: grid; grid-template-columns: 110px auto; row-gap: 12px; column-gap: 50px; align-items: start; justify-content: start; margin-top: 15px; }
+form label { text-align: right; font-size: 19px; line-height: 24px; color: #8B5A3C}
+form input[type="text"], form input[type="email"], form textarea { font-family: inherit; font-size: 13px; padding: 2px 4px; border: 1px solid #7c7c7c; width: 250px;}
+form input[type="date"] { font-family: inherit; font-size: 13px; padding: 2px 4px; border: 1px solid #7c7c7c; width: 150px; }
+
+form textarea { width: 350px; height: 70px; }
+form #myReset, form #mySubmit { grid-column: 1; justify-self: start; padding: 2px 8px; font-size: 12px; cursor: pointer; }
+
+/* casestudy4 */
+.error-msg{color: red; font-size:12px; margin-top:4px}
+#menuForm {display:block; margin-top:15px}
+.menu-table {width:100%; margin-left:0; border-collapse: collapse; font-size:14px}
+.menu-table td{padding:10px; vertical-align: middle;}
+.menu-table td:first-child {width:150px; font-size:16px; font-weight: bold; text-align: center;}
+.menu-table td:nth-child(2){width:auto}
+.menu-table td:nth-child(3), .menu-table td:nth-child(4) { width: 70px; text-align: center; }
+.menu-table input[type="radio"] { margin: 8px 3px 0 8px; }
+.menu-table input[type="text"] { width: 55px; padding: 4px; text-align: center; }
+.menu-table label { font-size: 13px; color: #2E0000; }
+.total-price { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-top: 12px; }
+.total-price label { font-size: 18px; color: #2E0000; }
+#total_price { width: 70px; padding: 4px; text-align: center; }

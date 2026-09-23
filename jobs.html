@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>JavaJam Coffee House</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="wrapper">
+  <header>
+    <img src="header.png" width="600" height="100" alt="JavaJam Coffee House">
+  </header>
+  <div id="leftcolumn">
+    <nav>
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="music.html">Music</a></li>
+        <li><a href="jobs.html">Jobs</a></li>
+        </ul>
+    </nav>	
+  </div>
+  <div id="rightcolumn">
+        <div class="content"> 
+            <div>
+                <h1>Jobs at JavaJam</h1>
+                <p>Want to work at JavaJam? Fill out the form below to start your application. Required fields are marked with an asterisk*</p>
+            </div>
+            <form action="show_post.php" method="post" id="jobForm" novalidate> 
+                <label for="CustName">*Name:</label>
+                <div>
+                    <input type="text" name="CustName" id="CustName" required placeholder="Enter your name here">
+                    <br><span class="error-msg" id="nameError"></span>
+                </div>
+                
+
+                <label for="CustEmail">*E-mail:</label>
+                <input type="email" name="CustEmail" id="CustEmail" required placeholder="Enter your Email-ID here">
+
+                <label for="myDateid">Start Date:</label>
+                <input type="date" name="myDate" id="myDateid">
+
+                <label for="comments">*Experience:</label>
+                <textarea name="comments" id="comments" rows="4" cols="30" required placeholder="Enter your past experience here"></textarea>
+
+                <input type="reset" id="myReset" value="Clear" class="btn btn-secondary btn-sm">
+                <input type="submit" id="mySubmit" value="Apply Now" class="btn btn-primary btn sm"> 
+            </form>
+        </div>
+  </div>
+    <footer>
+        Copyright &copy; 2014 JavaJam Coffee House<br>
+        Priscilla@Chong.com
+    </footer>
+</div>
+<script src="formvalidation.js"></script>
+</body>
+</html>
+
+
