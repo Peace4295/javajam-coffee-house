@@ -1,3 +1,17 @@
+<?php
+
+require "includes/database.php";
+
+$sql = "SELECT * FROM menu_items";
+$result = $conn->query($sql);
+
+$prices = [];
+
+while ($row = $result->fetch_assoc()) {
+    $prices[$row["id"]] = $row["price"];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +30,7 @@
     <nav>
         <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="menu.html">Menu</a></li>
+        <li><a href="menu.php">Menu</a></li>
         <li><a href="music.html">Music</a></li>
         <li><a href="jobs.html">Jobs</a></li>
         </ul>
@@ -31,13 +45,14 @@
                         <tr>
                             <td>Just Java</td>
                             <td>Regular house blend, decafinated coffee, or flavour of the day. 
-                                <br><strong>Endless Cup $2.00</strong>
+                                <br><strong>Endless Cup $<?php echo number_format($prices[1],2); ?></strong>
+                                <input  type="hidden" name="java_price" id="java_price" value="<?php echo $prices[1]; ?>">. <!-- hidden unit price from db-->
                             </td>
                             <td>
-                                <input type="text" id="qty_java" name="qty_java">
+                                <input type="text" id="qty_java" name="qty_java"> <!-- customer enter qty -->
                                 </td>
                             <td>
-                                <input type="text" id="price_java" name="price_java" readonly>
+                                <input type="text" id="price_java" name="price_java" readonly> <!-- calc subtotal shown to customer -->
                             
                             </td>
                         </tr>
@@ -46,11 +61,11 @@
                             <td>House blended coffee infused into a smooth,steamed milk
                                 <!-- <br><strong>Single $2.00, Double $3.00</strong> -->
                                  <br>
-                                <input type="radio" name="cafeshot" id="cafesingle" value="2.00" checked>
-                                <label> Single $2.00 </label>
+                                <input type="radio" name="cafeshot" id="cafesingle" value="<?php echo $prices[2];?>" checked>
+                                <label> Single $<?php echo number_format($prices[2],2); ?></label>
 
-                                <input type="radio" name="cafeshot" id="cafedouble" value="3.00">
-                                <label for="CafeDouble">Double $3.00</label>
+                                <input type="radio" name="cafeshot" id="cafedouble" value="<?php echo $prices[3];?>">
+                                <label for="CafeDouble">Double $<?php echo number_format($prices[3],2); ?></label>
                             </td>
                             <td> 
                                 <input type="text" id="qty_cafe" name="Qty_cafe"> 
@@ -64,11 +79,11 @@
                             <td>Sweetened espresso blended with icy-cold milkand served in a chilled glass
                                 <!-- <br><strong>Single $4.75, Double $5.75</strong> -->
                                  <br>
-                            <input type="radio" name="cappshot" id="cappsingle" value="4.75" checked>
-                                <label> Single $4.75 </label>
+                            <input type="radio" name="cappshot" id="cappsingle" value="<?php echo $prices[4];?>" checked>
+                                <label> Single $<?php echo number_format($prices[4],2); ?></label>
 
-                                <input type="radio" name="cappshot" id="cappdouble" value="5.75">
-                                <label for="CafeDouble">Double $5.75</label>
+                                <input type="radio" name="cappshot" id="cappdouble" value="<?php echo $prices[5];?>">
+                                <label for="CafeDouble">Double $<?php echo number_format($prices[5],2); ?></label>
                             </td>
                             <td> 
                                 <input type="text" id="qty_capp" name="qty_capp"> 

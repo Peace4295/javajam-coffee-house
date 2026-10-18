@@ -19,7 +19,8 @@ function Cal_Java(event){
         return false;
     }
    
-        var Total_Java_Price = 2.00 * JavaNode.value;
+        var Total_Java_Price = document.getElementById("java_price").value;
+        var Total_Java_Price = JavaPrice * JavaNode.value;
         document.getElementById("price_java").value = parseFloat(Total_Java_Price).toFixed(2); //calc sub total price
 
         Cal_Total();
