@@ -19,7 +19,7 @@ function Cal_Java(event){
         return false;
     }
    
-        var Total_Java_Price = document.getElementById("java_price").value;
+        var JavaPrice = document.getElementById("java_price").value;
         var Total_Java_Price = JavaPrice * JavaNode.value;
         document.getElementById("price_java").value = parseFloat(Total_Java_Price).toFixed(2); //calc sub total price
 
@@ -53,12 +53,12 @@ function Cal_Cafe(event){
     }
     if(CafeNode1.checked == true)
     {
-        var Total_Cafe_Price = CafeNode1.value * CafeNode3.value;
+        var Total_Cafe_Price = CafeNode1.dataset.price * CafeNode3.value;
         document.getElementById("price_cafe").value = parseFloat(Total_Cafe_Price).toFixed(2); //calc sub total price
     }
     if(CafeNode2.checked == true)
     {
-        var Total_Cafe_Price = CafeNode2.value * CafeNode3.value;
+        var Total_Cafe_Price = CafeNode2.dataset.price * CafeNode3.value;
         document.getElementById("price_cafe").value = parseFloat(Total_Cafe_Price).toFixed(2);
     }
     Cal_Total(); //calc total price
@@ -90,12 +90,12 @@ function Cal_Capp(event){
     }
     if(CappNode1.checked == true)
     {
-        var Total_Cafe_Price = CappNode1.value * CappNode3.value;
+        var Total_Cafe_Price = CappNode1.dataset.price * CappNode3.value;
         document.getElementById("price_capp").value = parseFloat(Total_Cafe_Price).toFixed(2); //calc sub total price
     }
     if(CappNode2.checked == true)
     {
-        var Total_Cafe_Price = CappNode2.value * CappNode3.value;
+        var Total_Cafe_Price = CappNode2.dataset.price * CappNode3.value;
         document.getElementById("price_capp").value = parseFloat(Total_Cafe_Price).toFixed(2);
     }
     Cal_Total();
