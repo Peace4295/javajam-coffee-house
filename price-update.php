@@ -23,11 +23,14 @@ if (isset($_POST["updatePrices"])) {
 
             // Get entered price safely
             $newPrice = trim($_POST[$priceField] ?? "");
+            if($newPrice === "") {
+                $missingPrice++;
+            }
 
             // Selected product has no new price
-            if ($newPrice == "") {
+            if ( $newPrice == "" || !is_numeric($newPrice) || $newPrice < 0.01 || $newPrice > 999.99 ) {
+                $message = "Please enter a valid price between $0.01 and $999.99 for all selected products.";
 
-                $message = "Please enter a new price for every selected product.";
                 $valid = false;
                 break;
             }
@@ -40,6 +43,14 @@ if (isset($_POST["updatePrices"])) {
                 break;
             }
         }
+            if ($missingPrice > 0) {
+                if ($missingPrices == 1){
+                    $message = "1 selected product is missing a new price.";
+                } else {
+                    $message = $missingPrices . " selected products are missing new prices.";
+                }
+                    $valid = false;
+            }
 
 
         // Only update database if all selected inputs are valid
@@ -156,7 +167,7 @@ $result = $conn->query($sql);
                                 $<?php echo number_format($row['price'], 2); ?>
                             </td>
                             <td>
-                                <input type="number" name="price_<?php echo $row['id']; ?>" step="0.01" min="0" class="price-input">
+                                <input type="number" name="price_<?php echo $row['id']; ?>" step="0.01" min="0.01" max="999.99" class="price-input">
                             </td>
 
                         </tr>

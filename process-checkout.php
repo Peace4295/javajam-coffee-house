@@ -10,8 +10,18 @@ $qtyCafe = (int) ($_POST["qty_cafe"] ?? 0);
 $qtyCapp = (int) ($_POST["qty_capp"] ?? 0);
 
 // Get selected categories
-$cafeShot = $_POST["cafeshot"] ?? "Single";
-$cappShot = $_POST["cappshot"] ?? "Single";
+$cafeShot = $_POST["cafeshot"] ?? "";
+$cappShot = $_POST["cappshot"] ?? "";
+
+$validOptions = ["Single", "Double"];
+
+if (!in_array($cafeShot, $validOptions, true)) {
+    die("Invalid Cafe au Lait option.");
+}
+
+if (!in_array($cappShot, $validOptions, true)) {
+    die("Invalid Iced Cappuccino option.");
+}
 
 
 // Prevent negative quantities
@@ -166,7 +176,7 @@ try {
 
     $conn->rollback();
 
-    echo "Checkout failed: " . $e->getMessage();
+    die("Checkout failed: " . $e->getMessage());
 }
 
 ?>
@@ -218,9 +228,6 @@ try {
 </div>
 </body>
 </html>
-
-
-
 
 
 <!-- cs5 enhancement 

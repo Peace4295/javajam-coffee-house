@@ -130,3 +130,29 @@ $("#resetOrder").click(function()
 
 });
 
+var menuForm = document.getElementById("menuForm");
+
+menuForm.addEventListener("submit", function(event)
+{
+    var qtyJava = document.getElementById("qty_java").value;
+    var qtyCafe = document.getElementById("qty_cafe").value;
+    var qtyCapp = document.getElementById("qty_capp").value;
+
+    // Blank quantities are treated as 0
+    var javaValue = qtyJava == "" ? 0 : parseInt(qtyJava);
+    var cafeValue = qtyCafe == "" ? 0 : parseInt(qtyCafe);
+    var cappValue = qtyCapp == "" ? 0 : parseInt(qtyCapp);
+
+    // Stop checkout if everything is blank or 0
+    if (javaValue == 0 &&
+        cafeValue == 0 &&
+        cappValue == 0)
+    {
+        event.preventDefault();
+
+        alert("Please select at least one item before checking out.");
+
+        return;
+    }
+});
+
