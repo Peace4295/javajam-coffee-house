@@ -56,3 +56,41 @@ form #myReset, form #mySubmit { grid-column: 1; justify-self: start; padding: 2p
 .total-price { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-top: 12px; }
 .total-price label { font-size: 18px; color: #2E0000; }
 #total_price { width: 70px; padding: 4px; text-align: center; }
+
+/* cs5 */
+
+.admin-page { margin: 0; background-color: #E6DFAF; color: #2E0000; }
+.admin-shell { width: 90%; max-width: 1000px; margin: 35px auto; background-color: #F9F5E8; border: 1px solid #CCB492; border-radius: 10px; box-shadow: 0 6px 18px rgba(46, 0, 0, 0.12); overflow: hidden; }
+.admin-page .admin-topbar { background-color: #CCB492; padding: 22px 30px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+.admin-topbar h1 { margin: 3px 0 0 0; font-size: 28px; }
+.admin-eyebrow, .section-kicker { margin: 0; color: #8B5A3C; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+.admin-page .admin-nav { display: flex; gap: 8px; margin: 0; padding: 0; }
+.admin-page .admin-nav-link { padding: 9px 14px; text-decoration: none; color: #2E0000; font-weight: bold; background-color: rgba(245, 245, 224, 0.5); border-radius: 6px; }
+.admin-page .admin-nav-link:hover, .admin-page .admin-nav-link.active { background-color: #F5F5E0; color: #8B5A3C; }
+.admin-main { padding: 30px; }
+.report-heading { margin-bottom: 25px; }
+.report-heading h2 { margin: 5px 0; font-size: 30px; }
+.report-subtitle { margin: 0; color: #6B5547; }
+.admin-form-card { width: 100%; background-color: #FFFFFF; border: 1px solid #D7C4A4; border-radius: 8px; padding: 22px; box-sizing: border-box; box-shadow: 0 2px 7px rgba(46, 0, 0, 0.07); }
+/* Override Jobs form grid */
+.price-update-form { display: block; margin: 0; }
+.admin-page .admin-table { width: 100%; margin: 0; border-collapse: collapse; font-size: 14px; }
+/* Remove old alternating row CSS */ 
+.admin-page .admin-table tr:nth-child(odd), .admin-page .admin-table tr:nth-child(even) { background-color: transparent; }
+.admin-page .admin-table th { padding: 11px; background-color: #8B5A3C; color: white; text-align: left; border: none; }
+.admin-page .admin-table td { padding: 11px; background-color: white; border-bottom: 1px solid #E4D8C1; text-align: left; font-size: 14px; font-weight: normal; }
+/* Override your old td:first-child rule */
+.admin-page .admin-table td:first-child { width: 70px; border-right: none; text-align: center; font-size: 14px; font-weight: normal; }
+.admin-page .admin-table tbody tr:hover td { background-color: #FAF4E6; }
+.price-input { width: 110px; padding: 7px 9px; border: 1px solid #C7B391; border-radius: 5px; font-family: inherit; }
+.price-input:focus { outline: none; border-color: #8B5A3C; }
+.current-price { font-weight: bold; }
+.admin-actions { display: flex; justify-content: flex-end; margin-top: 20px; }
+.admin-button { padding: 10px 17px; border: none; border-radius: 6px; background-color: #8B5A3C; color: white; font-family: inherit; font-weight: bold; cursor: pointer; }
+.admin-button:hover { background-color: #6B3A2A; }
+.admin-message { margin-bottom: 18px; padding: 12px 15px; border: 1px solid #B9A278; border-radius: 6px; background-color: #EFE4CB; }
+
+.report-section { margin-bottom: 20px; }
+.report-section h3 { margin-top: 0; margin-bottom: 18px; color: #2E0000; font-size: 20px; }
+.best-seller { border-left: 5px solid #8B5A3C; background-color: #F4E9D2; }
+.best-seller h3 { margin: 10px 0 18px 0; font-size: 24px; }

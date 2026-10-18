@@ -147,91 +147,112 @@ if (count($categories) > 0) {
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="admin-page">
+    <div class="admin-shell">
+     <header class="admin-topbar">
+        <div>
+            <p class="admin-eyebrow">JavaJam Coffee House</p>
+            <h1>Admin Panel</h1>
+            </div>
+            <nav class="admin-nav">
+                <a class="admin-nav-link active" href="sales-report.php"> Sales Report </a>
+                <a class="admin-nav-link" href="price-update.php"> Price Update </a>
+            </nav>
+        </header>
+        <main class="admin-main">
+        <section class="report-heading">
+            <div>
+                <p class="section-kicker">Daily Sales Report</p>
+                <h2>Sales Overview</h2>
+                <p class="report-subtitle">Date: <?php echo date("Y-m-d"); ?></p>
+            </div>
+         </section>
+                
+                <section class="admin-form-card report-section">
+                    <h3>Sales by Category</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Total Quantity</th>
+                                <th>Total Sales</th>
+                            </tr>
+                        </thead>    
+                        <tbody>
 
-<h1>Daily Sales Report</h1>
-<h2>Sales by Category</h2>
+                        <?php while ($row = $categoryResult->fetch_assoc()) { ?>
 
-<table border="1">
+                            <tr>
+                                <td>
+                                    <?php
+                                    if ($row["category"] == NULL) {
+                                        echo "Null";
+                                    } else {
+                                        echo $row["category"];
+                                    }
+                                    ?>
+                                </td>
 
-    <tr>
-        <th>Category</th>
-        <th>Total Quantity</th>
-        <th>Total Sales</th>
-    </tr>
+                                <td> <?php echo $row["total_quantity"]; ?> </td>
+                                <td> $<?php echo number_format($row["total_sales"], 2); ?> </td>
+                            </tr>
 
-    <?php while ($row = $categoryResult->fetch_assoc()) { ?>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </section>
+                
+            
 
-        <tr>
-            <td>
-                <?php
-                if ($row["category"] == NULL) {
-                    echo "Null";
-                } else {
-                    echo $row["category"];
-                }
-                ?>
-            </td>
+    
+            <section class="admin-form-card report-section">
+            <h3>Sales by Product</h3>
+            <table class="admin-table">
 
-            <td>
-                <?php echo $row["total_quantity"]; ?>
-            </td>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Total Quantity</th>
+                        <th>Total Sales</th>
+                    </tr>
+                </thead>
 
-            <td>
-                $<?php echo number_format($row["total_sales"], 2); ?>
-            </td>
-        </tr>
+                <tbody>
+                <?php while ($row = $productResult->fetch_assoc()) { ?>
+                    <tr>
+                        <td> <?php echo $row["product_name"]; ?> </td>
+                        <td> <?php echo $row["total_quantity"]; ?> </td>
+                        <td> $<?php echo number_format($row["total_sales"], 2); ?> </td>
+                    </tr>
 
-    <?php } ?>
+                <?php } ?>
+                </tbody>
+            </table>
+        </section>
+        <section class="admin-form-card report-section best-seller">
 
-</table>
+            <p class="section-kicker">Top Performer</p>
+            <h3> <?php echo $bestProduct["product_name"]; ?> </h3>
 
-<h2>Sales by Product</h2>
+            <div>
 
-<table border="1">
+                <p>
+                    <span>Total Sales</span>
+                    <strong> $<?php echo number_format( $bestProduct["total_sales"], 2 ); ?> </strong>
+                </p>
 
-    <tr>
-        <th>Product</th>
-        <th>Total Quantity</th>
-        <th>Total Sales</th>
-    </tr>
+                <p>
+                    <span>Most Popular Option</span>
+                    <strong> <?php echo $popularOption; ?> </strong>
+                </p>
 
-    <?php while ($row = $productResult->fetch_assoc()) { ?>
+            </div>
 
-        <tr>
-            <td>
-                <?php echo $row["product_name"]; ?>
-            </td>
+        </section>
 
-            <td>
-                <?php echo $row["total_quantity"]; ?>
-            </td>
+    </main>
 
-            <td>
-                $<?php echo number_format($row["total_sales"], 2); ?>
-            </td>
-        </tr>
-
-    <?php } ?>
-
-</table>
-<h2>Best-Selling Product</h2>
-
-<p>
-    Best-selling product:
-    <strong>
-        <?php echo $bestProduct["product_name"]; ?>
-    </strong>
-
-    ($<?php echo number_format($bestProduct["total_sales"], 2); ?>)
-</p>
-
-<p>
-    Most popular option:
-    <strong>
-        <?php echo $popularOption; ?>
-    </strong>
-</p>
+</div>
 
 </body>
 </html>

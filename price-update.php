@@ -7,31 +7,61 @@ $message = "";
 // Check if Update Prices button was clicked
 if (isset($_POST["updatePrices"])) {
 
-    // Check whether at least one checkbox was selected
-    if (isset($_POST["selected"])) {
+    // Check whether at least one product was selected
+    if (!isset($_POST["selected"])) {
 
+        $message = "Please select at least one product.";
+
+    } else {
+
+        $valid = true;
+
+        // First check all selected products
         foreach ($_POST["selected"] as $id) {
 
             $priceField = "price_" . $id;
-            $newPrice = $_POST[$priceField];
 
-            // Only update if a new price was entered
-            if ($newPrice != "" && $newPrice > 0) {
+            // Get entered price safely
+            $newPrice = trim($_POST[$priceField] ?? "");
+
+            // Selected product has no new price
+            if ($newPrice == "") {
+
+                $message = "Please enter a new price for every selected product.";
+                $valid = false;
+                break;
+            }
+
+            // Price must be numeric and greater than 0
+            if (!is_numeric($newPrice) || $newPrice <= 0) {
+
+                $message = "Please enter a valid price greater than $0.";
+                $valid = false;
+                break;
+            }
+        }
+
+
+        // Only update database if all selected inputs are valid
+        if ($valid == true) {
+
+            foreach ($_POST["selected"] as $id) {
+
+                $priceField = "price_" . $id;
+                $newPrice = $_POST[$priceField];
 
                 $stmt = $conn->prepare(
-                    "UPDATE menu_items SET price = ? WHERE id = ?"
+                    "UPDATE menu_items
+                     SET price = ?
+                     WHERE id = ?"
                 );
 
                 $stmt->bind_param("di", $newPrice, $id);
                 $stmt->execute();
             }
+
+            $message = "Prices updated successfully.";
         }
-
-        $message = "Prices updated successfully.";
-
-    } else {
-
-        $message = "Please select at least one product.";
     }
 }
 
@@ -47,73 +77,109 @@ $result = $conn->query($sql);
 <head>
     <meta charset="utf-8">
     <title>JavaJam Price Update</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="admin-page">
+    <div class="admin-shell">
+     <header class="admin-topbar">
+        <div>
+            <p class="admin-eyebrow">JavaJam Coffee House</p>
+            <h1>Admin Panel</h1>
+            </div>
+            <nav class="admin-nav">
+                <a class="admin-nav-link" href="sales-report.php"> Sales Report </a>
+                <a class="admin-nav-link active" href="price-update.php"> Price Update </a>
+            </nav>
+        </header>
+        <main class="admin-main">
+            <section class="report-heading">
+                <div>
+                <p class="section-kicker">Product management</p>
 
-<h1>Product Price Update</h1>
-<?php
-if ($message != "") {
-    echo "<p>$message</p>";
-}
-?>
+                <h2>Price Update</h2>
 
-<form method="post">
+                <p class="report-subtitle">
+                    Select a menu item and enter its new selling price.
+                </p>
+            </div>
 
-    <table>
-        <tr>
-            <th>Select</th>
-            <th>Product</th>
-            <th>Category</th>
-            <th>Current Price</th>
-            <th>New Price</th>
-        </tr>
+        </section>
 
-        <?php while ($row = $result->fetch_assoc()) { ?>
+        <?php if ($message != "") { ?>
 
-        <tr>
-            <td>
-                <input type="checkbox"
-                       name="selected[]"
-                       value="<?php echo $row['id']; ?>">
-            </td>
-
-            <td>
-                <?php echo $row['product_name']; ?>
-            </td>
-
-            <td>
-                <?php
-                if ($row['category'] == NULL) {
-                    echo "-";
-                } else {
-                    echo $row['category'];
-                }
-                ?>
-            </td>
-
-            <td>
-                $<?php echo number_format($row['price'], 2); ?>
-            </td>
-
-            <td>
-                <input type="number"
-                       name="price_<?php echo $row['id']; ?>"
-                       step="0.01"
-                       min="0">
-            </td>
-        </tr>
+            <div class="admin-message">
+                <?php echo $message; ?>
+            </div>
 
         <?php } ?>
+        <section class="admin-form-card">
 
-    </table>
+            <form method="post" class="price-update-form">
 
-    <br>
+                <table class="admin-table">
 
-    <input type="submit" name="updatePrices" value="Update Prices">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Current Price</th>
+                            <th>New Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-</form>
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+
+                        <tr>
+
+                            <td>
+                                <input type="checkbox" name="selected[]" value="<?php echo $row['id']; ?>">
+                            </td>
+
+                            <td>
+                                <?php echo $row['product_name']; ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($row['category'] == NULL) {
+                                    echo "—";
+                                } else {
+                                    echo $row['category'];
+                                }
+                                ?>
+                            </td>
+
+                            <td class="current-price">
+                                $<?php echo number_format($row['price'], 2); ?>
+                            </td>
+                            <td>
+                                <input type="number" name="price_<?php echo $row['id']; ?>" step="0.01" min="0" class="price-input">
+                            </td>
+
+                        </tr>
+
+                    <?php } ?>
+
+                    </tbody>
+
+                </table>
+                <div class="admin-actions">
+
+                    <input type="submit" name="updatePrices" value="Update Prices" class="admin-button">
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
 
 </body>
 </html>
+

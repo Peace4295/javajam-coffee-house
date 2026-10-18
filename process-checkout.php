@@ -161,10 +161,6 @@ try {
     $conn->commit();
 
 
-    echo "<h1>Order Successful</h1>";
-    echo "Order ID: " . $orderId . "<br>";
-    echo "Total Price: $" . number_format($totalPrice, 2);
-
 
 } catch (Exception $e) {
 
@@ -174,3 +170,59 @@ try {
 }
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Order Confirmation</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light">
+
+<div class="container py-5">
+     <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+    <div class="alert alert-success">
+        <h2 class="alert-heading">Order Successful!</h2>
+        <p class="mb-0"> Your order has been saved successfully. </p>
+    </div>
+    <div class="card-body">
+        <h2 class="card-title mb-4"> Order Confirmation </h2>
+                    <p> <strong>Order ID:</strong> <?php echo $orderId; ?> </p>
+                    <p> <strong>Total Price:</strong> $<?php echo number_format($totalPrice, 2); ?> </p>
+                    <hr>
+                    <h5 class="mb-3"> Order Summary </h5>
+                    <ul class="list-group mb-4">
+
+                        <?php foreach ($items as $item) { ?>
+
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>
+                                    Quantity: <?php echo $item["quantity"]; ?>
+                                </span>
+                                <strong> $<?php echo number_format( $item["subtotal"], 2 ); ?> </strong>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                    <a href="menu.php" class="btn btn-primary"> Back to Menu </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+<!-- cs5 enhancement 
+- bootstrap-based admiinstrative UI enhancement
+- applied to price update, sales report and checkout confirmation pages -->
