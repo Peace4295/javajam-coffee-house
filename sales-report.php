@@ -89,8 +89,6 @@ $stmtPopular = $conn->prepare("
     GROUP BY m.category
 
     ORDER BY total_quantity DESC
-
-    LIMIT 1
 ");
 
 $stmtPopular->bind_param("s", $bestProductName);
@@ -99,7 +97,45 @@ $stmtPopular->execute();
 
 $popularResult = $stmtPopular->get_result();
 
-$popularCategory = $popularResult->fetch_assoc();
+$categories = [];
+
+while ($row = $popularResult->fetch_assoc()){
+    $categories[] = $row;
+}
+
+$popularOption = "";
+//make sure there is at least one category result
+if (count($categories) > 0) {
+
+    //since the query is ordered by qty descending, the first row will have the highest quantity
+    $highestQuantity = $categories[0]["total_quantity"];
+
+    //stores all categories that share the highest qty
+    $topCategories = [];
+
+    foreach ($categories as $category) {
+
+        //check if this cat has the same qty as the highest qty
+        if ($category["total_quantity"] == $highestQuantity) {
+            //justjava has no single/double cat, so cat may be null
+            if ($category["category"] == NULL) {
+                $topCategories[] = "Null";
+            } else {
+                $topCategories[] = $category["category"];
+            }
+        }
+    }
+
+    //if more than one cat has the same highest qty, then there is a tie.
+    if (count($topCategories) > 1) {
+        // combine the tied cat names into one msg
+        $popularOption = implode(" and ", $topCategories) . " (Tie)";
+
+    } else {
+        //if there is only one highest cat, dispaly that cat normally
+        $popularOption = $topCategories[0];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -193,13 +229,7 @@ $popularCategory = $popularResult->fetch_assoc();
 <p>
     Most popular option:
     <strong>
-        <?php
-        if ($popularCategory["category"] == NULL) {
-            echo "Null";
-        } else {
-            echo $popularCategory["category"];
-        }
-        ?>
+        <?php echo $popularOption; ?>
     </strong>
 </p>
 
